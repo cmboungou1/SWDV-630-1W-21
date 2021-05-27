@@ -1,0 +1,33 @@
+class CheckingAccount:
+
+
+    def __init__(self,name,address,accountnumber,balance):
+
+        self.__name = name;
+
+        self.__address = address
+
+        self.__acoountNumber = accountnumber
+
+        self.__balance = balance
+
+
+    def credtitAccount(self,credit):
+
+        self.__balance = self.__balance + credit
+
+
+    def debitAccount(self,debitAmount):
+
+        if self.__balance < debitAmount:
+
+            print("The balance ${:.2f} is low. The debit operation can not be performed for amount of ${:.2f}.".format(self.__balance,debitAmount))
+
+        else:
+
+            self.__balance = self.__balance - debitAmount
+ 
+
+    def showBalance(self):
+
+        print("Thank you for using United Bank, the balance of the account number {} is ${:.2f}, which is in name of {}.".format(self.__acoountNumber,self.__balance,self.__name))
