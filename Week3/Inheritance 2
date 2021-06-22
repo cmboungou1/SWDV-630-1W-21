@@ -1,0 +1,28 @@
+1.
+Spell is the parent class.
+Accio and Confundo are child classes.
+
+2.
+Spell is the base class.
+Accio and Confundo are the sub-classes.
+
+3.
+Accio
+Summoning Charm Accio
+No description
+Confundus Charm Confundo
+Causes the victim to become confused and befuddled.
+
+4.
+get_description() of Confundo is called
+because in study_spell(Confundo()) we are calling study_spell with an object of Confundo, hence the get_description of Confundo is called. The
+get_description is expecting the current object as a parameter and it returns 'Causes the victim to become confused and befuddled.'
+
+5.
+class Accio():
+  def __init__(self):
+    self.display = 'This charm summons an object to the caster, potentially over a significant distance'
+  
+  def __str__(self): 
+    return (self.display)
+
