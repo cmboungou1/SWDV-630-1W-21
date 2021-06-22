@@ -1,0 +1,77 @@
+# parent class
+class Employee():             
+        def __init__(self, name, emp_type):   
+                self.name = name
+                self.emp_type = emp_type
+                self.bi_weekly_sal = 0              
+        def welcome_msg(self):
+            print ('Welcome to United time keeping system '+self.name+'.') 
+        def calculate_salary(self):
+            if self.emp_type == 'manager':
+                self.bi_weekly_sal = 10000
+            elif self.emp_type == 'full time employee':
+                self.bi_weekly_sal = 5000
+            elif self.emp_type == 'part time employee':
+                self.bi_weekly_sal = 2500
+            print(self.bi_weekly_sal)
+               
+# child class
+class Manager( Employee ):           
+        def __init__(self, name, id_number, days_worked, emp_type ):
+                self.name = name
+                self.id_number = id_number
+                self.days_worked = days_worked
+                # invoking the __init__ of the parent class 
+                Employee.__init__(self, name, emp_type)
+        def man_call_welcome_msg(self):
+            Employee.welcome_msg(self)
+        def man_sal_display(self):
+            print(self.name+'\'s salary:')
+            Employee.calculate_salary(self)
+            print('Number of days worked: ')
+            print(self.days_worked)
+
+# child class
+class Full_Time_Employee( Employee ):           
+        def __init__(self, name, id_number, hours_worked, emp_type ):
+                self.name = name
+                self.id_number = id_number
+                self.hours_worked = hours_worked
+                # invoking the __init__ of the parent class 
+                Employee.__init__(self, name, emp_type)
+        def femp_call_welcome_msg(self):
+            Employee.welcome_msg(self)
+        def femp_sal_display(self):
+            print(self.name+'\'s paycheck:')
+            Employee.calculate_salary(self)
+            print('Number of days worked: ')
+            print(self.hours_worked)
+
+# child class
+class Part_Time_Employee( Employee ):           
+        def __init__(self, name, id_number, hours_worked, emp_type ):
+                self.name = name
+                self.id_number = id_number
+                self.hours_worked = hours_worked
+                # invoking the __init__ of the parent class 
+                Employee.__init__(self, name, emp_type)
+        def ptemp_call_welcome_msg(self):
+            Employee.welcome_msg(self)
+        def ptemp_sal_display(self):
+            print(self.name+'\'s paycheck:')
+            Employee.calculate_salary(self)
+            print('Number of hours worked: ')
+            print(self.hours_worked)
+            
+
+manager1 = Manager('Christ', 123, 10, 'manager')
+manager1.man_call_welcome_msg()
+manager1.man_sal_display()
+
+femployee1 = Full_Time_Employee('Cara', 1225, 40, 'full time employee')
+femployee1.femp_call_welcome_msg()
+femployee1.femp_sal_display()
+
+pemployee1 = Part_Time_Employee('David', 1995, 20, 'part time employee')
+pemployee1.ptemp_call_welcome_msg()
+pemployee1.ptemp_sal_display()
