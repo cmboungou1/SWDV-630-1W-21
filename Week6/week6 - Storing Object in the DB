@@ -1,0 +1,48 @@
+#reference week 6 module video
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, String, Integer, Date
+
+
+Base = declarative_base()
+
+class Employee(Base):
+    def __init__(self, id_number, name, hourly_rate):
+        self.id_number = id_number
+        self.name = name
+        self.hourly_rate = hourly_rate
+    #Create
+    __tablename__ = "employee"
+    
+    id_number = Column(Integer, primary_key=True)
+    name = Column(String)
+    hourly_rate = Column(Integer)
+    
+    def __str__(self):
+        return "Employee ID Number: {} Employee Name: {} Employee Hourly Rate: {}".format(self.id_number, self.name,self.hourly_rate)
+    
+def main():
+    engine = create_engine('sqlite:///:memory:', echo = False) 
+    Base.metadata.create_all(engine)
+    #Populate
+    employee1 = Employee(1,"Christ Mboungou",25)
+    print(employee1)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    session.add(employee1)
+    session.add_all([
+        Employee(id_number=2,name="David McNeil",hourly_rate=25),
+        Employee(id_number=3,name="Cara Black",hourly_rate=15)
+        ])
+    session.commit()
+    #retrieve/update
+    emp_change_Rate = session.query(Employee).filter_by(id_number=1).first()
+    emp_change_Rate.hourly_rate = 35
+    session.commit()
+    
+    for row in session.query(Employee).all():
+        print("From memory db > " + str(row.id_number), row.name, row.hourly_rate)
+    
+main()
+    
